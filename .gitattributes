@@ -3,6 +3,7 @@
 .github/workflows export-ignore
 .github/ISSUE_TEMPLATE.md
 
+bin export-ignore
 frontend export-ignore
 tests export-ignore
 
