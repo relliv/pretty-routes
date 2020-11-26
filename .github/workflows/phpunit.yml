@@ -3,7 +3,6 @@ on: [ push ]
 
 jobs:
     build:
-
         runs-on: ubuntu-latest
 
         strategy:
@@ -36,3 +35,25 @@ jobs:
                 run: |
                     mkdir -p build/logs
                     vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+    deploy:
+        runs-on: ubuntu-latest
+
+        if: success() && $GITHUB_REF == refs/tags/*
+
+        strategy:
+            fail-fast: true
+
+        name: Deploy frontend
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Release
+                run: |
+                    VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+                    chmod a+x bin/release.sh
+
+                    ./bin/release.sh ${ VERSION }
