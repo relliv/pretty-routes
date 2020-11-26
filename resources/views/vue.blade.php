@@ -95,42 +95,6 @@
             hide-details
             clearable
         ></v-text-field>
-
-        <v-spacer></v-spacer>
-        <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                    v-bind="attrs"
-                    v-on="on"
-                    :class="{ rotate: loading }"
-                    :disabled="loading"
-                    icon
-                    @click="getRoutes"
-                >
-                    <v-icon>mdi-refresh</v-icon>
-                </v-btn>
-            </template>
-            <span v-text="trans('refreshRoutes')"></span>
-        </v-tooltip>
-
-        <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                    v-bind="attrs"
-                    v-on="on"
-                    @click="openGitHubRepository"
-                    icon
-                >
-                    <v-avatar size="36">
-                        <img
-                            :src="repository.icon"
-                            alt="Github Project Page"
-                        >
-                    </v-avatar>
-                </v-btn>
-            </template>
-            <span v-text="trans('openGitHub')"></span>
-        </v-tooltip>
     </v-app-bar>
 
     <v-main>
