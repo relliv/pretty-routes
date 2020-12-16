@@ -1,5 +1,114 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash"></script>
+
 <script>
+    const trans = {!! json_encode(\PrettyRoutes\Facades\Trans::all(), JSON_UNESCAPED_UNICODE) !!};
+    const isEnabledCleanup = {{ config('app.env') !== 'production' && (bool) config('app.debug') === true ? 'true' : 'false' }};
+
+    const colorScheme = () => {
+        switch ('{{ config('pretty-routes.color_scheme', 'auto') }}') {
+            case 'dark':
+                return true;
+            case 'light':
+                return false;
+            default:
+                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+    };
+
     new Vue({
+        el: '#app',
+        vuetify: new Vuetify({
+            theme: {
+                dark: colorScheme()
+            }
+        }),
+
+        data: {
+            itemsPerPage: 15,
+            loading: false,
+
+            url: {
+                routes: '{{ route("pretty-routes.list") }}',
+                clean: '{{ route("pretty-routes.clear") }}'
+            },
+
+            repository: {
+                url: 'https://github.com/andrey-helldar/pretty-routes',
+                icon: 'https://github.com/fluidicon.png'
+            },
+
+            routes: [],
+
+            headers: [
+                { text: trans.priority, sortable: true, value: 'priority' },
+                { text: trans.methods, sortable: true, value: 'methods' },
+                { text: trans.domain, sortable: true, value: 'domain' },
+                { text: trans.path, sortable: true, value: 'path' },
+                { text: trans.name, sortable: true, value: 'name' },
+                { text: trans.module, sortable: true, value: 'module' },
+                { text: trans.action, sortable: true, value: 'action' },
+                { text: trans.middlewares, sortable: true, value: 'middlewares' }
+            ],
+
+            badges: {
+                GET: 'green darken-1',
+                HEAD: 'grey darken-1',
+                POST: 'blue darken-1',
+                PUT: 'orange darken-1',
+                PATCH: 'cyan lighten-1',
+                DELETE: 'red darken-1',
+                OPTIONS: 'lime darken-1'
+            },
+
+            filter: {
+                deprecated: [],
+                types: 'all',
+                module: [],
+                domain: [],
+                value: null
+            },
+
+            items: {
+                base: [
+                    { key: 'without', value: trans.without, color: 'grey lighten-2' }
+                ],
+
+                deprecated: [
+                    { key: 'only', value: trans.only },
+                    { key: 'without', value: trans.without, color: 'grey lighten-2' }
+                ],
+
+                types: [
+                    { key: 'all', value: trans.all },
+                    { key: 'api', value: trans.api },
+                    { key: 'web', value: trans.web }
+                ],
+
+                domains: [],
+                modules: []
+            },
+
+            colors: [
+                'white--text amber darken-4',
+                'white--text blue darken-2',
+                'white--text deep-orange darken-3',
+                'white--text deep-purple darken-1',
+                'white--text green darken-2',
+                'white--text indigo darken-1',
+                'white--text light-blue darken-1',
+                'white--text light-green darken-3',
+                'white--text lime darken-4',
+                'white--text orange darken-4',
+                'white--text pink darken-4',
+                'white--text purple darken-3',
+                'white--text teal darken-1',
+                'white--text yellow darken-3'
+            ]
+        },
+
         computed: {
             filteredRoutes() {
                 return this.routes.filter(route => {
@@ -23,6 +132,17 @@
                 });
             },
 
+            countRoutes() {
+                if (this.loading === true || this.$refs.routes === undefined) {
+                    return '...';
+                }
+
+                let all = this.routes.length;
+                let filtered = this.$refs.routes.$children[0].filteredItems.length;
+                let particle = this.trans('of');
+
+                return all === filtered ? all : `${ filtered } ${ particle } ${ all }`;
+            },
 
             hasModules() {
                 return this.hasRoute('module');
@@ -30,6 +150,14 @@
 
             hasDomains() {
                 return this.hasRoute('domain');
+            },
+
+            hasDeprecated() {
+                return _.filter(this.routes, item => item.deprecated === true).length > 0;
+            },
+
+            hasTypes() {
+                return _.filter(this.routes, item => item.is_api === true || item.is_web === true).length > 0;
             },
 
             sortedDomains: {
@@ -78,17 +206,38 @@
         },
 
         methods: {
-            //getRoutes() {
-            //    axios.get(this.url)
-            //        .then(response => {
-            //            this.routes = response.data;
-            //
-            //            this.setDomains();
-            //            this.setModules();
-            //        })
-            //        .catch(error => console.error(error))
-            //        .finally(() => this.loading = false);
-            //},
+            getRoutes(force = false) {
+                if (this.loading === true && force === false) {
+                    return;
+                }
+
+                this.loading = true;
+
+                axios.get(this.url.routes)
+                    .then(response => {
+                        this.routes = response.data;
+
+                        this.setDomains();
+                        this.setModules();
+                    })
+                    .catch(error => console.error(error))
+                    .finally(() => this.loading = false);
+            },
+
+            clearRoutes() {
+                if (this.loading === true) {
+                    return;
+                }
+
+                this.loading = true;
+
+                axios.post(this.url.clean)
+                    .then(response => {
+                        this.getRoutes(true);
+                    })
+                    .catch(error => console.error(error))
+                    .finally(() => this.loading = false);
+            },
 
             getRoutesKey(key) {
                 let result = [...this.items.base];
@@ -177,6 +326,29 @@
                 return all || without || search;
             },
 
+            isDirty() {
+                return this.isDoesntEmptyValue(this.filter.deprecated)
+                    || this.isDoesntEmptyValue(this.filter.types)
+                    || this.isDoesntEmptyValue(this.filter.domain)
+                    || this.isDoesntEmptyValue(this.filter.module)
+                    || this.isDoesntEmptyValue(this.filter.value);
+            },
+
+            isEmptyValue(value) {
+                return _.isEmpty(value);
+            },
+
+            isDoesntEmptyValue(value) {
+                return ! this.isEmptyValue(value);
+            },
+
+            resetFilters() {
+                this.filter.deprecated = null;
+                this.filter.types = null;
+                this.filter.domain = null;
+                this.filter.module = null;
+                this.filter.value = null;
+            },
 
             sortFilter(key, items) {
                 return this.filter[key] = items.sort();
@@ -208,10 +380,34 @@
                 }).length > 0;
             },
 
+            highlight(value, regex, modifier) {
+                return value.replace(regex, `<span class="orange--text text--darken-2">${ modifier }</span>`);
+            },
+
+            highlightParameters(value) {
+                return this.highlight(value, /({[^}]+})/gi, '$1');
+            },
+
+            highlightMethod(value) {
+                return this.highlight(value, /(@.*)$/gi, '$&');
+            },
+
             pushFilter(key, value) {
                 this.isEmptyValue(this.filter[key])
                     ? this.filter[key] = [value]
                     : this.filter[key].push(value);
+            },
+
+            isEnabledCleanup() {
+                return window.isEnabledCleanup;
+            },
+
+            trans(key) {
+                return trans[key];
+            },
+
+            openGitHubRepository() {
+                window.open(this.repository.url);
             }
         }
     });
