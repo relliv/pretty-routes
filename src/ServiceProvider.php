@@ -3,8 +3,8 @@
 namespace PrettyRoutes;
 
 use Helldar\LaravelSupport\Facades\App;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use PrettyRoutes\Facades\Config;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -38,7 +38,7 @@ class ServiceProvider extends BaseServiceProvider
 
     protected function isDisabled(): bool
     {
-        return Config::get('pretty-routes.debug_only', true) && ! Config::get('app.debug');
+        return Config::disabled();
     }
 
     protected function fullPath(string $path): string

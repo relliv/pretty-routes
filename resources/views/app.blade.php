@@ -20,8 +20,8 @@
 
 <script>
     window.trans = {!! json_encode(\PrettyRoutes\Facades\Trans::all(), JSON_UNESCAPED_UNICODE) !!};
-    window.dark = '{{ config('pretty-routes.color_scheme', 'auto') }}';
-    window.isEnabledCleanup = {{ config('app.env') !== 'production' && (bool) config('app.debug') === true ? 'true' : 'false' }};
+    window.dark = '{{ \PrettyRoutes\Facades\Config::colorScheme() }}';
+    window.isEnabledCleanup = {{ \PrettyRoutes\Facades\Config::allowCleanup() ? 'true' : 'false' }};
     window.githubIcon = '{{ \PrettyRoutes\Facades\Resources::githubIcon() }}';
     window.repositoryUrl = '{{ \PrettyRoutes\Facades\Resources::repositoryUrl() }}';
 
