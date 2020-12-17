@@ -59,8 +59,8 @@ class ViewTest extends TestCase
         $response = $this->get('/routes');
 
         $response->assertStatus(200);
-        $response->assertSee(route("pretty-routes.list"));
-        $response->assertSee(route("pretty-routes.clear"));
+        $response->assertSee(route('pretty-routes.list'));
+        $response->assertSee(route('pretty-routes.clear'));
     }
 
     public function testResources()
