@@ -16,6 +16,7 @@ final class TranslationsTest extends TestCase
 
         $response->assertSee('Action');
         $response->assertSee('All');
+        $response->assertSee('Clear route cache');
         $response->assertSee('Deprecated');
         $response->assertSee('Domain');
         $response->assertSee('Loading... Please wait...');
@@ -66,6 +67,7 @@ final class TranslationsTest extends TestCase
         $response->assertSee('Не указано');
         $response->assertSee('Обновить список маршрутов');
         $response->assertSee('Открыть страницу проекта в GitHub');
+        $response->assertSee('Очистить кэш роутов');
         $response->assertSee('Поиск');
         $response->assertSee('Показать');
         $response->assertSee('Приоритет');
