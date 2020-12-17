@@ -13,6 +13,10 @@ return [
 
     'url' => 'routes',
 
+    /*
+     * Defines middlewares for different access levels.
+     */
+
     'middlewares' => [
         /*
          * The middleware(s) to apply before attempting to access routes pages (web + api).
@@ -38,6 +42,10 @@ return [
 
         'api' => 'api',
     ],
+
+    /**
+     * Defines routes to hide.
+     */
 
     'hide' => [
         /*
