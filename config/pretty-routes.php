@@ -61,7 +61,9 @@ return [
          */
 
         'matching' => [
+            '#^__clockwork#',
             '#^_debugbar#',
+            '#^horizon#',
             '#^_ignition#',
             '#^telescope#',
             '#^routes#',
