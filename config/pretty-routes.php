@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
      * Indicates whether to enable pretty routes only when debug is enabled (APP_DEBUG).
      */
