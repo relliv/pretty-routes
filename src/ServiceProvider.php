@@ -38,7 +38,7 @@ class ServiceProvider extends BaseServiceProvider
 
     protected function isDisabled(): bool
     {
-        return Config::disabled();
+        return ! Config::enabled();
     }
 
     protected function path(string $path): string

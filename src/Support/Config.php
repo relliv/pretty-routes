@@ -2,16 +2,18 @@
 
 namespace PrettyRoutes\Support;
 
+use Illuminate\Support\Facades\Config as AppConfig;
+
 final class Config
 {
-    public function disabled(): bool
+    public function enabled(): bool
     {
-        return $this->get('debug_only', true) && ! config('app.debug');
+        return $this->get('enabled');
     }
 
     public function allowCleanup(): bool
     {
-        return ! $this->disabled() && config('app.env') !== 'production';
+        return AppConfig::get('app.env') !== 'production' && AppConfig::get('app.debug');
     }
 
     public function url(): string
@@ -54,13 +56,18 @@ final class Config
         return (bool) $this->get('domain_force');
     }
 
-    public function forceLocale(): bool
+    public function forceLocale(): ?string
     {
-        return (bool) $this->get('locale_force');
+        return $this->get('locale_force') ?: null;
     }
 
-    protected function get($key, $default = null)
+    public function set(string $key, $value): void
     {
-        return config("pretty-routes.{$key}", $default);
+        AppConfig::set("pretty-routes.{$key}", $value);
+    }
+
+    protected function get(string $key, $default = null)
+    {
+        return AppConfig::get("pretty-routes.{$key}", $default);
     }
 }

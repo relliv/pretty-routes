@@ -2,7 +2,8 @@
 
 namespace Tests;
 
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Config as AppConfig;
+use PrettyRoutes\Facades\Config;
 
 final class TranslationsTest extends TestCase
 {
@@ -114,7 +115,8 @@ final class TranslationsTest extends TestCase
 
     protected function setConfigLocale(string $app, string $package = null): void
     {
-        Config::set('app.locale', $app);
-        Config::set('pretty-routes.locale_force', $package ?: false);
+        AppConfig::set('app.locale', $app);
+
+        Config::set('locale_force', $package ?: false);
     }
 }
