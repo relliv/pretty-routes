@@ -64,38 +64,6 @@
             {
                 "name": "andrey-helldar/support",
                 "url": "https://github.com/andrey-helldar/support"
-            },
-            {
-                "name": "illuminate/contracts",
-                "url": "https://github.com/illuminate/contracts"
-            },
-            {
-                "name": "illuminate/http",
-                "url": "https://github.com/illuminate/http"
-            },
-            {
-                "name": "illuminate/routing",
-                "url": "https://github.com/illuminate/routing"
-            },
-            {
-                "name": "illuminate/support",
-                "url": "https://github.com/illuminate/support"
-            },
-            {
-                "name": "illuminate/view",
-                "url": "https://github.com/illuminate/view"
-            },
-            {
-                "name": "mockery/mockery",
-                "url": "https://github.com/mockery/mockery"
-            },
-            {
-                "name": "orchestra/testbench",
-                "url": "https://github.com/orchestral/testbench"
-            },
-            {
-                "name": "phpunit/phpunit",
-                "url": "https://github.com/sebastianbergmann/phpunit"
             }
         ]
     }
