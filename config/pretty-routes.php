@@ -14,7 +14,6 @@ return [
     'url' => 'routes',
 
     'middlewares' => [
-
         /*
          * The middleware(s) to apply before attempting to access routes pages (web + api).
          *
@@ -41,7 +40,6 @@ return [
     ],
 
     'hide' => [
-
         /*
          * The methods to hide.
          */
