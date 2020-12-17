@@ -51,7 +51,6 @@ final class Resources
             $this->jsManifest(),
             $this->jsVendor(),
             $this->githubIcon(),
-            $this->repositoryUrl(),
         ];
 
         return array_values(array_unique(array_map(function ($url) {
