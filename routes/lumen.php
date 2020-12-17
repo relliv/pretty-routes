@@ -9,19 +9,19 @@ Route::group([
 ], static function () {
     Route::get('/', [
         'middleware' => config('pretty-routes.web_middleware'),
-        'uses'       => 'PrettyRoutes\Http\PrettyRoutesController@show',
+        'uses'       => 'PrettyRoutes\Http\MainController@show',
         'as'         => 'show',
     ]);
 
     Route::get('json', [
         'middleware' => config('pretty-routes.api_middleware'),
-        'uses'       => 'PrettyRoutes\Http\PrettyRoutesController@routes',
+        'uses'       => 'PrettyRoutes\Http\MainController@routes',
         'as'         => 'list',
     ]);
 
     Route::post('clear', [
         'middleware' => config('pretty-routes.api_middleware'),
-        'uses'       => 'PrettyRoutes\Http\PrettyRoutesController@clear',
+        'uses'       => 'PrettyRoutes\Http\MainController@clear',
         'as'         => 'clear',
     ]);
 });

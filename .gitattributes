@@ -4,8 +4,12 @@
 .github/FUNDING.yml export-ignore
 .github/ISSUE_TEMPLATE.md export-ignore
 
-resources/js export-ignore
+dist export-ignore
 tests export-ignore
+
+resources/js export-ignore
+resources/scss export-ignore
+resources/vue export-ignore
 
 .codecov.yml export-ignore
 .gitattributes export-ignore

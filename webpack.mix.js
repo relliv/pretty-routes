@@ -10,5 +10,7 @@ mix
     .setPublicPath(public_path)
 
     .js(assets + 'js/app.js', public_path)
+
+    .extract()
     .version()
     .sourceMaps();

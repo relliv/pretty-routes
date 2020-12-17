@@ -6,7 +6,7 @@ use Helldar\LaravelRoutesCore\Support\Routes;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Artisan;
 
-class PrettyRoutesController extends BaseController
+class MainController extends BaseController
 {
     /**
      * Getting a template for routes.
@@ -15,7 +15,7 @@ class PrettyRoutesController extends BaseController
      */
     public function show()
     {
-        return view('pretty-routes::layout');
+        return view('pretty-routes::app');
     }
 
     /**

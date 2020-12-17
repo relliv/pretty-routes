@@ -47,10 +47,13 @@ then
     VERSION="v$VERSION"
 fi
 
+# Compile frontend
+yarn prod
+
 # Set Tag To Constant
 sed -i 's/v[0-9]*\.[0-9]*\.[0-9]*/v{$VERSION}/g' ./src/Application.php
 git add .
-git commit
+git commit -m "Release {$VERSION}"
 
 # Tag Package
 git tag $VERSION
