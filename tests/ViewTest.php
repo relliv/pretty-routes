@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Illuminate\Support\Facades\Config;
+use PrettyRoutes\Application;
 use PrettyRoutes\Facades\Resources;
 
 class ViewTest extends TestCase
@@ -78,5 +79,14 @@ class ViewTest extends TestCase
         $response->assertSee(Resources::jsManifest());
         $response->assertSee(Resources::jsVendor());
         $response->assertSee(Resources::jsApp());
+    }
+
+    public function testVersion()
+    {
+        $response = $this->get('/routes');
+
+        $response->assertStatus(200);
+
+        $response->assertSee(Application::VERSION);
     }
 }
