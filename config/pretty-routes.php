@@ -43,7 +43,7 @@ return [
         'api' => 'api',
     ],
 
-    /**
+    /*
      * Defines routes to hide.
      */
 
