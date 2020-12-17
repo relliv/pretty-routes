@@ -9,7 +9,7 @@ final class Resources
 {
     public function fonts(): string
     {
-        return 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900';
+        return 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap';
     }
 
     public function icons(): string

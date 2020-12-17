@@ -7,7 +7,8 @@
     <title>{{ \PrettyRoutes\Facades\Trans::get('title') }} | {{ config('app.name') }}</title>
 
     @foreach(\PrettyRoutes\Facades\Resources::hosts() as $host)
-        <link rel="preconnect" href="{{ $host }}">
+        <link rel="preconnect" href="{{ $host }}" crossorigin>
+        <link rel="dns-prefetch" href="{{ $host }}">
     @endforeach
 
     <link href="{{ \PrettyRoutes\Facades\Resources::fonts() }}" rel="stylesheet">
