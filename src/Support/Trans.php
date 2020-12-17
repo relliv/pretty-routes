@@ -47,9 +47,9 @@ final class Trans
         return reset($exploded);
     }
 
-    protected function getForceLocale()
+    protected function getForceLocale(): ?string
     {
-        return Conf::forceLocale();
+        return Conf::locale();
     }
 
     protected function exist(string $locale): bool

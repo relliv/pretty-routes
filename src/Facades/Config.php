@@ -15,7 +15,7 @@ use PrettyRoutes\Support\Config as Support;
  * @method static string colorScheme()
  * @method static string url()
  * @method static string|null apiMiddleware()
- * @method static string|null forceLocale()
+ * @method static string|null locale()
  * @method static string|null webMiddleware()
  * @method static void set(string $key, $value)
  */

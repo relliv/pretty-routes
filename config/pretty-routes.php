@@ -14,45 +14,53 @@ return [
 
     'url' => 'routes',
 
-    /*
-     * The middleware(s) to apply before attempting to access routes pages (web + api).
-     */
+    'middlewares' => [
 
-    'middlewares' => [],
+        /*
+         * The middleware(s) to apply before attempting to access routes pages (web + api).
+         *
+         * For example, ['auth.basic'].
+         */
 
-    /*
-     * The middleware(s) to apply before attempting to access WEB route page.
-     *
-     * Also routes for WEB will be determined by this value.
-     */
+        'both' => [],
 
-    'web_middleware' => 'web',
+        /*
+         * The middleware(s) to apply before attempting to access WEB route page.
+         *
+         * Also routes for WEB will be determined by this value.
+         */
 
-    /*
-     * The middleware(s) to apply before attempting to access API route.
-     *
-     * Also routes for API will be determined by this value.
-     */
+        'web' => 'web',
 
-    'api_middleware' => 'api',
+        /*
+         * The middleware(s) to apply before attempting to access API route.
+         *
+         * Also routes for API will be determined by this value.
+         */
 
-    /*
-     * The methods to hide.
-     */
-
-    'hide_methods' => [
-        'HEAD',
+        'api' => 'api',
     ],
 
-    /*
-     * The routes to hide with regular expression
-     */
+    'hide' => [
 
-    'hide_matching' => [
-        '#^_debugbar#',
-        '#^_ignition#',
-        '#^telescope#',
-        '#^routes#',
+        /*
+         * The methods to hide.
+         */
+
+        'methods' => [
+            'HEAD',
+        ],
+
+        /*
+         * The routes to hide with regular expression
+         */
+
+        'matching' => [
+            '#^_debugbar#',
+            '#^_ignition#',
+            '#^telescope#',
+            '#^routes#',
+        ],
     ],
 
     /*
@@ -83,8 +91,8 @@ return [
      *
      * For example "de".
      *
-     * Otherwise, leave the value "false".
+     * Otherwise, leave the value "null" to the application default.
      */
 
-    'locale_force' => false,
+    'locale' => null,
 ];

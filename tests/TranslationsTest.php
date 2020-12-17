@@ -117,6 +117,6 @@ final class TranslationsTest extends TestCase
     {
         AppConfig::set('app.locale', $app);
 
-        Config::set('locale_force', $package ?: false);
+        Config::set('locale', $package);
     }
 }

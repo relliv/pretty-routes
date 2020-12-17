@@ -38,7 +38,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function setConfig($app): void
     {
-        $app['config']->set('pretty-routes.hide_methods', ['HEAD', 'GET']);
+        $app['config']->set('pretty-routes.hide.methods', ['HEAD', 'GET']);
         $app['config']->set('pretty-routes.enabled', true);
     }
 }

@@ -23,27 +23,27 @@ final class Config
 
     public function middlewares(): array
     {
-        return (array) $this->get('middlewares');
+        return (array) $this->get('middlewares.both');
     }
 
     public function webMiddleware(): ?string
     {
-        return $this->get('web_middleware');
+        return $this->get('middlewares.web');
     }
 
     public function apiMiddleware(): ?string
     {
-        return $this->get('api_middleware');
+        return $this->get('middlewares.api');
     }
 
     public function hideMethods(): array
     {
-        return (array) $this->get('hide_methods', []);
+        return (array) $this->get('hide.methods', []);
     }
 
     public function hideMatching(): array
     {
-        return (array) $this->get('hide_matching', []);
+        return (array) $this->get('hide.matching', []);
     }
 
     public function colorScheme(): string
@@ -56,18 +56,23 @@ final class Config
         return (bool) $this->get('domain_force');
     }
 
-    public function forceLocale(): ?string
+    public function locale(): ?string
     {
-        return $this->get('locale_force') ?: null;
+        return $this->get('locale') ?: null;
     }
 
     public function set(string $key, $value): void
     {
-        AppConfig::set("pretty-routes.{$key}", $value);
+        AppConfig::set($this->key($key), $value);
     }
 
     protected function get(string $key, $default = null)
     {
-        return AppConfig::get("pretty-routes.{$key}", $default);
+        return AppConfig::get($this->key($key), $default);
+    }
+
+    protected function key(string $key): string
+    {
+        return 'pretty-routes.' . $key;
     }
 }

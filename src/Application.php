@@ -4,5 +4,5 @@ namespace PrettyRoutes;
 
 final class Application
 {
-    public const VERSION = 'v1.25.0';
+    public const VERSION = 'v2.0.0';
 }
