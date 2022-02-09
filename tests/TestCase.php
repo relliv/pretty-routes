@@ -57,7 +57,7 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('pretty-routes.debug_only', false);
     }
 
-    protected function setConfigLocale(string $for_app, string $for_package = null): void
+    protected function setConfigLocale(string $for_app, ?string $for_package = null): void
     {
         Config::set('app.locale', $for_app);
         Config::set('pretty-routes.locale_force', $for_package ?: false);

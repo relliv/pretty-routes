@@ -38,8 +38,8 @@ class PrettyRoutesController extends BaseController
     /**
      * Getting a list of routes.
      *
-     * @param  \DragonCode\LaravelRoutesCore\Support\Routes  $routes
-     * @param  \PrettyRoutes\Support\Config  $config
+     * @param \DragonCode\LaravelRoutesCore\Support\Routes $routes
+     * @param \PrettyRoutes\Support\Config $config
      *
      * @return \Illuminate\Http\JsonResponse
      */
