@@ -69,6 +69,10 @@ php artisan vendor:publish --provider="PrettyRoutes\ServiceProvider"
 7. Run the command `composer update`.
 8. Profit!
 
+## Using
+
+Open the `/route` uri. For example, [http:://localhost:8000/route](http:://localhost:8000/route])
+
 ## License
 
 This package is licensed under the [MIT License](LICENSE).
