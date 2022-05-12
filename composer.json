@@ -60,6 +60,9 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "conflict": {
+        "garygreen/pretty-routes": "*"
+    },
     "extra": {
         "laravel": {
             "providers": [
