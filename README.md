@@ -43,6 +43,19 @@ if (env('APP_ENV') !== 'production') {
 }
 ```
 
+Next, copy [config](config/pretty-routes.php) file to `config/pretty-routes.php` and change options to:
+
+```
+return [
+    // ...
+
+    'web_middleware' => null,
+    'api_middleware' => null,
+
+    // ...
+];
+```
+
 ### Both frameworks
 
 By default, the package exposes a `/routes` url. If you wish to configure this, publish the config.
