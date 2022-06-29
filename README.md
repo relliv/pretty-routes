@@ -28,10 +28,15 @@ composer require dragon-code/pretty-routes --dev
 
 ### Lumen Framework
 
+> We do not provide support for the Lumen Framework because we consider it to be an insufficiently functional product,
+> as a result of which various errors may occur on more recent versions of Lumen.
+>
+> In addition, Taylor Otwell also [announced](https://lumen.laravel.com/docs/9.x#installation) the end of support for Lumen.
+
 To get the latest version of `Pretty Routes`, simply require the project using [Composer](https://getcomposer.org):
 
 ```bash
-composer require dragon-code/pretty-routes --dev
+composer require dragon-code/pretty-routes dragon-code/laravel-routes-core:^4.1 --dev
 ```
 
 In your `bootstrap/app.php` file add a line above `$app->register(App\Providers\RouteServiceProvider::class)`:
