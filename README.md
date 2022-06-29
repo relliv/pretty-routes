@@ -34,7 +34,7 @@ To get the latest version of `Pretty Routes`, simply require the project using [
 composer require dragon-code/pretty-routes --dev
 ```
 
-In your `bootstrap/app/php` file add a line above `$app->register(App\Providers\RouteServiceProvider::class)`:
+In your `bootstrap/app.php` file add a line above `$app->register(App\Providers\RouteServiceProvider::class)`:
 
 ```php
 if (env('APP_ENV') !== 'production') {
