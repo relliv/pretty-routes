@@ -32,6 +32,8 @@ composer require dragon-code/pretty-routes --dev
 > as a result of which various errors may occur on more recent versions of Lumen.
 >
 > In addition, Taylor Otwell also [announced](https://lumen.laravel.com/docs/9.x#installation) the end of support for Lumen.
+>
+> ![image](https://user-images.githubusercontent.com/10347617/176400737-4911dc8d-0d5e-44df-a8af-782700807077.png)
 
 To get the latest version of `Pretty Routes`, simply require the project using [Composer](https://getcomposer.org):
 
